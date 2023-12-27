@@ -29,7 +29,7 @@ export default function Home() {
   }
 
   return (
-    <div className="container mx-auto h-full flex justify-center items-center p-3">
+    <div className="container mx-auto flex justify-center items-center p-3">
       <main className="w-full max-w-sm min-h-96">
         <Todont account={account}>
           <div className="flex flex-col items-center">

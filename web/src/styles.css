@@ -24,3 +24,7 @@ html,
 body {
   height: 100%;
 }
+
+body {
+  @apply lg:py-[15vh];
+}
