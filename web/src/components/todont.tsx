@@ -71,21 +71,17 @@ export default function Todont(props: TodontProps) {
     }
   }
 
-  const incrementTask = (task: Task) => {
-    if (!selectedTask) return
-
+  const incrementTask = (id: number) => {
     whileLoading(async () => {
-      const res = await contract.incrementTask(selectedTask)
+      const res = await contract.incrementTask(id)
       await res.wait()
       getTasks()
     })
   }
 
-  const deleteTask = (task: Task) => {
-    if (!selectedTask) return
-
+  const deleteTask = (id: number) => {
     whileLoading(async () => {
-      const res = await contract.deleteTask(selectedTask)
+      const res = await contract.deleteTask(id)
       await res.wait()
       getTasks()
     })
@@ -158,8 +154,8 @@ export default function Todont(props: TodontProps) {
               count={task.count.toString()}
               selected={task.id == selectedTask}
               onSelect={() => selectTask(task.id)}
-              onIncrement={() => incrementTask(task)}
-              onDelete={() => deleteTask(task)}
+              onIncrement={() => incrementTask(task.id)}
+              onDelete={() => deleteTask(task.id)}
             />
           </div>
         ))}
