@@ -12,11 +12,11 @@
   }
 
   .btn-lg {
-    @apply !w-[48px] !h-[48px];
+    @apply !w-[42px] !h-[42px];
   }
 
   .input {
-    @apply border rounded py-2 px-3;
+    @apply border rounded py-3 px-4 text-lg;
   }
 }
 

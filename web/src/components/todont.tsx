@@ -98,7 +98,7 @@ export default function Todont(props: TodontProps) {
   return (
     <div className="flex-grow w-full flex flex-col p-4">
 
-      <div className={cn('flex items-end mb-2', signedIn ? 'justify-between' : 'justify-center')}>
+      <div className={cn('flex items-end mb-3', signedIn ? 'justify-between' : 'justify-center')}>
         <div className="flex items-end">
           <h1 className="text-3xl font-bold uppercase">
             {signedIn ? (
@@ -126,7 +126,7 @@ export default function Todont(props: TodontProps) {
       </div>
 
       {signedIn && showAddForm && (
-        <form className="flex items-center" onSubmit={addTask}>
+        <form className="flex items-center mb-2" onSubmit={addTask}>
           <input
             className="input w-full"
             placeholder="Be an attention seeker"
@@ -135,26 +135,33 @@ export default function Todont(props: TodontProps) {
             onChange={e => setText(e.target.value)}
             readOnly={addLoading}
           />
-          <button className="btn btn-icon ml-1" disabled={addLoading || !text}>
+          <button className="btn btn-icon btn-lg ml-2" disabled={addLoading || !text}>
             &#x2713;
           </button>
         </form>
       )}
 
-      <div className="mt-4">
+      <div className="mt-2">
         {props.children}
 
-        {signedIn && tasks.map(task => (
-          <TaskItem
+        {signedIn && !tasks.length && (
+          <p className="text-center text-lg text-gray-500 mt-16">It's empty</p>
+        )}
+
+        {signedIn && tasks.map((task, i) => (
+          <div
             key={task.id}
-            className="mb-4"
-            text={task.text}
-            count={task.count.toString()}
-            selected={task.id == selectedTask}
-            onSelect={() => selectTask(task.id)}
-            onIncrement={() => incrementTask(task)}
-            onDelete={() => deleteTask(task)}
-          />
+            className={cn(i % 2 && 'bg-gray-50')}
+          >
+            <TaskItem
+              text={task.text}
+              count={task.count.toString()}
+              selected={task.id == selectedTask}
+              onSelect={() => selectTask(task.id)}
+              onIncrement={() => incrementTask(task)}
+              onDelete={() => deleteTask(task)}
+            />
+          </div>
         ))}
       </div>
     </div>

@@ -15,28 +15,28 @@ type TaskItemProps = {
 export default function TaskItem(props: TaskItemProps) {
   return (
     <div
-      className={cn('flex items-center py-2 px-3 rounded', props.selected && 'outline outline-1', props.className)}
+      className={cn('flex items-center py-3 px-2 rounded', props.selected && 'outline outline-1', props.className)}
       onClick={() => props.onSelect()}
     >
-      <span className="flex-grow text-xl">{props.text}</span>
+      <span className="flex-grow text-lg">{props.text}</span>
       <div className='flex items-center gap-4'>
         {props.selected && (
           <>
             <button
-              className='btn btn-icon bg-red-400'
+              className='btn btn-icon bg-red-500 text-white'
               onClick={e => { e.stopPropagation(); props.onDelete() }}
             >
               <FontAwesomeIcon icon={faXmark} />
             </button>
             <button
-              className='btn btn-icon bg-green-400'
+              className='btn btn-icon bg-green-500 text-white'
               onClick={e => { e.stopPropagation(); props.onIncrement() }}
             >
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </>
         )}
-        <span className="w-[48px] h-[48px] flex justify-center items-center rounded-full border border-gray-400">
+        <span className="w-[42px] h-[42px] flex justify-center items-center rounded-full border border-gray-400">
           {props.count || 0}
         </span>
       </div>

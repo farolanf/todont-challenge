@@ -34,7 +34,7 @@ export default function Home() {
         <Todont account={account}>
           <div className="flex flex-col items-center">
             {!metamaskInstalled && (
-              <p className="mt-8">Please install MetaMask</p>
+              <p className="mt-8 text-lg">Please install MetaMask</p>
             )}
 
             {metamaskInstalled && !account && (
