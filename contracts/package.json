@@ -4,7 +4,7 @@
     "test": "hardhat test",
     "compile": "hardhat compile",
     "export-abi": "tsx scripts/export-abi.ts ../web/abi.json",
-    "deploy": "hardhat run scripts/deploy.ts"
+    "deploy": "hardhat run scripts/deploy.ts --network eosevm_testnet"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",

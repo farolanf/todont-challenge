@@ -41,12 +41,35 @@ describe("Todont", () => {
       const contract = await loadFixture(deploy);
       await contract.addTask('Task 1');
       await contract.addTask('Task 2');
+      const tasks = await contract.getTasks();
+      assert(tasks && tasks.length == 2, 'Tasks length not 2');
+    });
+
+    it('Should be ordered by newest first', async () => {
+      const contract = await loadFixture(deploy);
+      await contract.addTask('Task 1');
+      await contract.addTask('Task 2');
+      const tasks = await contract.getTasks();
+      assert(tasks[0].id == 2n, 'Task 1 id not 2');
+      assert(tasks[1].id == 1n, 'Task 2 id not 1');
+    });
+
+    it('Should not include deleted tasks', async () => {
+      const contract = await loadFixture(deploy);
+      await contract.addTask('Task 1');
+      await contract.addTask('Task 2');
       await contract.addTask('Task 3');
       await contract.deleteTask(2);
       const tasks = await contract.getTasks();
       assert(tasks && tasks.length == 2, 'Tasks length not 2');
-      assert(tasks[0].id == 1n, 'Task 1 id not 1');
-      assert(tasks[1].id == 3n, 'Task 2 id not 3');
+      assert(tasks[0].id == 3n, 'Task 1 id not 3');
+      assert(tasks[1].id == 1n, 'Task 2 id not 1');
+    });
+
+    it('Should handle no tasks', async () => {
+      const contract = await loadFixture(deploy);
+      const tasks = await contract.getTasks();
+      assert(tasks && tasks.length == 0, 'Tasks length not 0');
     });
   });
 });

@@ -57,8 +57,14 @@ contract Todont {
     function getTasks() external view returns (Task[] memory) {
         Task[] memory tasksView = new Task[](taskIds[msg.sender].length);
 
-        for (uint32 i = 0; i < taskIds[msg.sender].length; i++) {
-            tasksView[i] = tasks[msg.sender][taskIds[msg.sender][i]];
+        // order newest first
+        if (taskIds[msg.sender].length > 0) {
+            uint index = taskIds[msg.sender].length - 1;
+            for (uint32 i = 0; i < taskIds[msg.sender].length; i++) {
+                tasksView[index - i] = tasks[msg.sender][
+                    taskIds[msg.sender][i]
+                ];
+            }
         }
 
         return tasksView;
